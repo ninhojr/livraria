@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.engine('html', require('ejs').renderFile);
 
-app.get('/', (res, req) => {
+app.get('/', (req, res) => {
     res.render(__dirname + '/src/view/index.html');
 });
 
