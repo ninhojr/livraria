@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-__dirname() = path.resolve();
+__dirname = path.resolve();
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: false}));
