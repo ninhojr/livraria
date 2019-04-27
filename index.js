@@ -14,5 +14,9 @@ app.get('/', (req, res) => {
     res.render(__dirname + '/src/view/index.html');
 });
 
+app.get('/login', (req, res) => {
+    res.render(__dirname + '/src/view/login-adm.html');
+});
+
 app.listen(process.env.port || 3000);
 console.log('Executando na porta 3000!');
