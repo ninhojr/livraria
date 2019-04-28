@@ -18,5 +18,21 @@ app.get('/login', (req, res) => {
     res.render(__dirname + '/src/view/login-adm.html');
 });
 
+app.get('/cadastrar', (req, res) => {
+    res.render(__dirname + '/src/view/cadastrar-livro.html');
+})
+
+app.post('/cadastrar', (req, res) => {
+    let login = req.body.login;
+    let senha = req.body.senha;
+    if (login == 12345 && senha == 12345) {
+        res.render(__dirname + '/src/view/cadastrar-livro.html');
+        console.log('senha certa');
+    } else {
+        console.log('Senha inválida!');
+    }
+});
+
+
 app.listen(process.env.port || 3000);
 console.log('Executando na porta 3000!');
