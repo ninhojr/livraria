@@ -35,11 +35,26 @@ app.get('/cadastrar', (req, res) => {
 })
 
 app.post('/cadastrar', (req, res) => {
+    connection.query('SELECT * FROM adm', (err, rows) => {
+        if (err) {
+            console.log('Erro', err.message, err.stack);
+        } else {
+            const login = req.body.login;
+            const senha = req.body.senha;
+            rows.forEach(adm => {
+                if (adm.login == login && adm.senha == senha) {
+                    res.render(__dirname + '/src/view/cadastrar-livro.html');
+                } else {
+                    console.log('Usuário inexistente');
+                }
+            });
+        }
+    });
+
     let login = req.body.login;
     let senha = req.body.senha;
     if (login == 12345 && senha == 12345) {
         res.render(__dirname + '/src/view/cadastrar-livro.html');
-        console.log('senha certa');
     } else {
         console.log('Senha inválida!');
     }
