@@ -4,6 +4,18 @@ const path = require('path');
 __dirname = path.resolve();
 var bodyParser = require('body-parser');
 
+
+const mysql = require('mysql');
+var sha1 = require('sha1');
+
+const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: '',
+    database: 'livraria',
+    port: '3306'
+});
+
 app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(express.static(__dirname + '/'));
