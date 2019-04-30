@@ -30,11 +30,7 @@ app.get('/login', (req, res) => {
     res.render(__dirname + '/src/view/login-adm.html');
 });
 
-app.get('/cadastrar', (req, res) => {
-    res.render(__dirname + '/src/view/cadastrar-livro.html');
-})
-
-app.post('/cadastrar', (req, res) => {
+app.post('/login', (req, res) => {
     connection.query('SELECT * FROM adm', (err, rows) => {
         if (err) {
             console.log('Erro', err.message, err.stack);
@@ -50,16 +46,31 @@ app.post('/cadastrar', (req, res) => {
             });
         }
     });
-
-    let login = req.body.login;
-    let senha = req.body.senha;
-    if (login == 12345 && senha == 12345) {
-        res.render(__dirname + '/src/view/cadastrar-livro.html');
-    } else {
-        console.log('Senha inválida!');
-    }
 });
 
+app.get('/cadastrar', (req, res) => {
+    res.render(__dirname + '/src/view/cadastrar-livro.html');
+})
+
+app.post('/cadastrar', (req, res) => {
+    let titulo = req.body.titulo;
+    let autor = req.body.autor;
+    let edicao = req.body.edicao;
+    let editora = req.body.editora;
+    let descricao = req.body.descricao;
+
+    const livro = {'titulo':titulo, 'autor':autor, 'edicao':edicao, 'editora':editora, 'descricao': descricao};
+    
+    connection.query('INSERT INTO livro SET ?', livro, (err, res) => {
+        if (err) {
+            console.log(err.message, err.stack);
+        } else {
+            msg = 'Livro cadastrado com sucesso!';
+            console.log('Inserido', res.insertId);
+        }
+    });
+    res.render(__dirname + '/src/view/cadastrar-livro.html');
+});
 
 app.listen(process.env.port || 3000);
 console.log('Executando na porta 3000!');
