@@ -4,7 +4,6 @@ const path = require('path');
 __dirname = path.resolve();
 var bodyParser = require('body-parser');
 
-
 const mysql = require('mysql');
 var sha1 = require('sha1');
 
@@ -30,7 +29,6 @@ app.get('/', (req, res) => {
             res.render(__dirname + '/src/view/index.html', {livros:rows});
         }
     });
-    //res.render(__dirname + '/src/view/index.html');
 });
 
 app.get('/login', (req, res) => {
@@ -46,7 +44,7 @@ app.post('/login', (req, res) => {
             const senha = req.body.senha;
             rows.forEach(adm => {
                 if (adm.login == login && adm.senha == senha) {
-                    res.render(__dirname + '/src/view/cadastrar-livro.html');
+                    res.render(__dirname + '/src/view/gerenciar-livro.html');
                 } else {
                     console.log('Usuário inexistente');
                 }
@@ -56,7 +54,13 @@ app.post('/login', (req, res) => {
 });
 
 app.get('/cadastrar', (req, res) => {
-    res.render(__dirname + '/src/view/cadastrar-livro.html');
+    connection.query('SELECT * FROM livro', (err, rows, fields) => {
+        if (err) {
+            console.log(err.message, err.stack);
+        } else {
+            res.render(__dirname + '/src/view/gerenciar-livro.html', {livros:rows});
+        }
+    });
 })
 
 app.post('/cadastrar', (req, res) => {
@@ -76,17 +80,7 @@ app.post('/cadastrar', (req, res) => {
             console.log('Inserido', res.insertId);
         }
     });
-    res.render(__dirname + '/src/view/cadastrar-livro.html');
-});
-
-app.get('/listar', (req, res) => {
-    connection.query('SELECT * FROM livro', (err, rows, fields) => {
-        if (err) {
-            console.log(err.message, err.stack);
-        } else {
-            res.render(__dirname + '/src/view/index.html', {livros:rows});
-        }
-    });
+    res.redirect('/cadastrar');
 });
 
 app.listen(process.env.port || 3000);
