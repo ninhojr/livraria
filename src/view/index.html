@@ -35,14 +35,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>]
-                <td>Editora</td>
-                <td>Descrição</td>
-              </tr>
+                <% livros.forEach((livro) => { %>
+                <tr>
+                    <th scope="row"><%= livro.id %></th>
+                    <td><%= livro.titulo %></td>
+                    <td><%= livro.autor %></td>
+                    <td><%= livro.edicao %></td>
+                    <td><%= livro.editora %></td>
+                    <td><%= livro.descricao %></td>
+                </tr>
+                <% })%>
             </tbody>
           </table>
     </body>

@@ -23,7 +23,14 @@ app.use(express.static(__dirname + '/'));
 app.engine('html', require('ejs').renderFile);
 
 app.get('/', (req, res) => {
-    res.render(__dirname + '/src/view/index.html');
+    connection.query('SELECT * FROM livro', (err, rows, fields) => {
+        if (err) {
+            console.log(err.message, err.stack);
+        } else {
+            res.render(__dirname + '/src/view/index.html', {livros:rows});
+        }
+    });
+    //res.render(__dirname + '/src/view/index.html');
 });
 
 app.get('/login', (req, res) => {
@@ -70,6 +77,16 @@ app.post('/cadastrar', (req, res) => {
         }
     });
     res.render(__dirname + '/src/view/cadastrar-livro.html');
+});
+
+app.get('/listar', (req, res) => {
+    connection.query('SELECT * FROM livro', (err, rows, fields) => {
+        if (err) {
+            console.log(err.message, err.stack);
+        } else {
+            res.render(__dirname + '/src/view/index.html', {livros:rows});
+        }
+    });
 });
 
 app.listen(process.env.port || 3000);
