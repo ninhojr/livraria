@@ -53,7 +53,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.get('/cadastrar', (req, res) => {
+app.get('/gerenciar', (req, res) => {
     connection.query('SELECT * FROM livro', (err, rows, fields) => {
         if (err) {
             console.log(err.message, err.stack);
@@ -63,7 +63,7 @@ app.get('/cadastrar', (req, res) => {
     });
 })
 
-app.post('/cadastrar', (req, res) => {
+app.post('/gerenciar', (req, res) => {
     let titulo = req.body.titulo;
     let autor = req.body.autor;
     let edicao = req.body.edicao;
@@ -80,7 +80,21 @@ app.post('/cadastrar', (req, res) => {
             console.log('Inserido', res.insertId);
         }
     });
-    res.redirect('/cadastrar');
+    res.redirect('/gerenciar');
+});
+
+app.get('/excluir/:id', (req, res) => {
+    var id = req.params.id;
+
+    connection.query('DELETE FROM livro WHERE id = ?', [id], (err, result) => {
+        if (err) {
+            console.log(err.message, err.stack);
+        } else {
+            console.log('Excluído');
+        }
+    });
+    
+    res.redirect('/gerenciar');
 });
 
 app.listen(process.env.port || 3000);
