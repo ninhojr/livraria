@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf8">
+        <title>Gerenciar livros</title>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0 shrink-to-fit=no' name='viewport' />
+        <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/paper-kit.css">
+        <style>
+            input {
+                display: block;
+                margin-bottom: 10px;
+                height: 50px;
+                width: 500px;
+            }
+            form {
+                padding: 30px;
+            }
+            .botao {
+                width: 60px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="page-header">
+            <div class="content-center">
+                <div class="title-brand">
+                    <h1 class="display-1">Preencha os campos baixo</h1>
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent">
+                            <form method="post" action="/editar/<%= livro.id %>">   
+                                <input type="text" id="titulo" name="titulo" class="fadeIn second" placeholder="título" value="<%= livro.titulo %>">
+                                <input type="text" id="autor" name="autor" class="fadeIn second" placeholder="Autor" value="<%= livro.autor %>">
+                                <input type="number" id="edicao" name="edicao" class="fadeIn second" placeholder="Edição" value="<%= livro.edicao %>">
+                                <input type="text" id="editora" name="editora" class="fadeIn second" placeholder="Editora" value="<%= livro.editora %>">
+                                <textarea name="descricao" id="descricao" cols="95" rows="4"  placeholder="Descrição"><%= livro.descricao %></textarea>
+                                <input type="submit" class="fadeIn fourth btn btn-primary" value="Entrar">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

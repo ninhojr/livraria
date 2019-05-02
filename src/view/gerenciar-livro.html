@@ -28,7 +28,7 @@
                     <h1 class="display-1">Preencha os campos baixo</h1>
                     <div class="wrapper fadeInDown">
                         <div id="formContent">
-                            <form method="post" action="/cadastrar">
+                            <form method="post" action="/gerenciar">
                                 <input type="text" id="titulo" name="titulo" class="fadeIn second" placeholder="Título">
                                 <input type="text" id="autor" name="autor" class="fadeIn second" placeholder="Autor">
                                 <input type="number" id="edicao" name="edicao" class="fadeIn second" placeholder="Edição">
@@ -60,11 +60,11 @@
                                     <td><%= livro.edicao %></td>
                                     <td><%= livro.editora %></td>
                                     <td><%= livro.descricao %></td>
-                                    <form action="/editar" method="get">
+                                    <form action="/editar/<%= livro.id %>" method="get">
                                         <td><input type="submit" value="Editar" class="botao"></td>
                                     </form>
                                     <form action="/excluir/<%= livro.id %>" method="delete">
-                                        <td><input type="submit" id="ida" name="" value="Excluir" class="botao"></td>
+                                        <td><input type="submit" value="Excluir" class="botao"></td>
                                     </form>
                                 </tr>
                                 <% })%>

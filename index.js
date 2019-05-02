@@ -61,7 +61,7 @@ app.get('/gerenciar', (req, res) => {
             res.render(__dirname + '/src/view/gerenciar-livro.html', {livros:rows});
         }
     });
-})
+});
 
 app.post('/gerenciar', (req, res) => {
     let titulo = req.body.titulo;
@@ -83,8 +83,40 @@ app.post('/gerenciar', (req, res) => {
     res.redirect('/gerenciar');
 });
 
+app.get('/editar/:id', (req, res) => {
+    let id = req.params.id
+    connection.query('SELECT * FROM livro WHERE id = ?', [id], (err, rows, fields) => {
+        if (err) {
+            console.log(err.message, err.stack);
+        } else {
+            console.log('rows[0]', rows[0]);
+            res.render(__dirname + '/src/view/editar-livro.html', {livro:rows[0]});
+        }
+    });
+});
+
+app.post('/editar/:id', (req, res) => {
+    let id = req.params.id;
+    let titulo = req.body.titulo;
+    let autor = req.body.autor;
+    let edicao = req.body.edicao;
+    let editora = req.body.editora;
+    let descricao = req.body.descricao;
+
+
+    connection.query('UPDATE livro SET titulo = ?, autor = ?, edicao = ?, editora = ?, descricao = ? WHERE id = ?', [titulo, autor, edicao, editora, descricao, id], (err, result) => {
+        if (err) 
+            throw err;
+        
+        console.log('Alterado');
+        console.log(id);
+    });
+
+    res.redirect('/gerenciar');
+});
+
 app.get('/excluir/:id', (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
 
     connection.query('DELETE FROM livro WHERE id = ?', [id], (err, result) => {
         if (err) {
