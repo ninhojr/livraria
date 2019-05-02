@@ -22,6 +22,17 @@
         </style>
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="300">
+            <div class="container">
+                <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/" class="btn btn-danger btn-round">Home</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div class="page-header">
             <div class="content-center">
                 <div class="title-brand">
@@ -38,41 +49,41 @@
                             </form>
                         </div>
                         <hr>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Titulo</th>
-                                    <th scope="col">Autor</th>
-                                    <th scope="col">Edição</th>
-                                    <th scope="col">Editora</th>
-                                    <th scope="col">Descrição</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Excluir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% livros.forEach((livro) => { %>
-                                <tr>
-                                    <th scope="row"><%= livro.id %></th>
-                                    <td><%= livro.titulo %></td>
-                                    <td><%= livro.autor %></td>
-                                    <td><%= livro.edicao %></td>
-                                    <td><%= livro.editora %></td>
-                                    <td><%= livro.descricao %></td>
-                                    <form action="/editar/<%= livro.id %>" method="get">
-                                        <td><input type="submit" value="Editar" class="botao"></td>
-                                    </form>
-                                    <form action="/excluir/<%= livro.id %>" method="delete">
-                                        <td><input type="submit" value="Excluir" class="botao"></td>
-                                    </form>
-                                </tr>
-                                <% })%>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Edição</th>
+                    <th scope="col">Editora</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Excluir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% livros.forEach((livro) => { %>
+                <tr>
+                    <th scope="row"><%= livro.id %></th>
+                    <td><%= livro.titulo %></td>
+                    <td><%= livro.autor %></td>
+                    <td><%= livro.edicao %></td>
+                    <td><%= livro.editora %></td>
+                    <td><%= livro.descricao %></td>
+                    <form action="/editar/<%= livro.id %>" method="get">
+                        <td><input type="submit" value="Editar" class="botao"></td>
+                    </form>
+                    <form action="/excluir/<%= livro.id %>" method="delete">
+                        <td><input type="submit" value="Excluir" class="botao"></td>
+                    </form>
+                </tr>
+                <% })%>
+            </tbody>
+        </table>
     </body>
 </html>
